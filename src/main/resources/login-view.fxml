@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="219.0" prefWidth="369.0" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.carte.dbmsapp.controllers.LoginController">
     <bottom>
@@ -15,19 +14,15 @@
     </bottom>
     <left>
         <VBox prefHeight="174.0" prefWidth="182.0" BorderPane.alignment="CENTER">
-            <Label  text="Database Name" />
-            <TextField fx:id="databaseNameField"/>
+            <Label text="Database Name" />
+            <TextField fx:id="databaseNameField" />
             <Label text="Username" />
-            <TextField fx:id="usernameField"/>
+            <TextField fx:id="usernameField" />
             <Label text="Password" />
             <PasswordField fx:id="passwordField" />
         </VBox>
     </left>
    <right>
-      <DialogPane prefHeight="118.0" prefWidth="134.0" BorderPane.alignment="CENTER">
-         <header>
-            <Text fill="#000000a0" strokeType="OUTSIDE" strokeWidth="0.0" text="This RDBMS Client Gui will attempt to connect to the a postgresql server at localhost:5432 under these credentials" wrappingWidth="141.23987263441086" />
-         </header>
-      </DialogPane>
+      <DialogPane contentText="This RDBMS Client Gui will attempt to connect to a postgresql server at localhost:5432 under these credientials" expanded="true" headerText="Description" prefHeight="43.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

@@ -5,6 +5,7 @@ module org.carte.dbmsapp {
     requires java.sql;
 
     requires org.controlsfx.controls;
+    requires atlantafx.base;
 
     opens org.carte.dbmsapp.controllers to javafx.fxml;
     opens org.carte.dbmsapp to javafx.fxml;
