@@ -6,8 +6,9 @@ module org.carte.dbmsapp {
 
     requires org.controlsfx.controls;
     requires atlantafx.base;
+    requires com.google.gson;
 
-    opens org.carte.dbmsapp.controllers to javafx.fxml;
+    opens org.carte.dbmsapp.controllers to com.google.gson, javafx.fxml;
     opens org.carte.dbmsapp to javafx.fxml;
     exports org.carte.dbmsapp;
 }

@@ -23,7 +23,7 @@ class MainController : Initializable {
     }
 
     private fun onRunButtonPressed(event: ActionEvent) {
-        client.runQuery(queryArea.text)
+        client.runInsert(queryArea.text)
     }
 
 }

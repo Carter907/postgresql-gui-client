@@ -16,7 +16,7 @@ class PostgresClient(private val postgresDatabaseName: String, private val crede
         try {
             DriverManager.getConnection(
                 databaseURL,
-                credentials.userName,
+                credentials.username,
                 credentials.password
             ).close();
         } catch (e: SQLException) {
@@ -24,42 +24,39 @@ class PostgresClient(private val postgresDatabaseName: String, private val crede
         }
     }
 
-    fun runQuery(text: String?) {
+    fun runInsert(text: String?) {
+
 
         DriverManager.getConnection(
             databaseURL,
-            credentials.userName,
+            credentials.username,
             credentials.password
 
         ).use {
 
             println(it.getInfo())
 
-            it.prepareStatement("""
-                SELECT * FROM fruit;
-            """.trimIndent()).use { ps ->
-                ps.executeQuery().use { rs ->
-                    while (rs.next()) {
-                        println("""
-                            ${rs.getInt(1)}
-                            ${rs.getString(2)}
-                            ${rs.getString(3)}
-                            ${rs.getFloat(4)}
-                        """.trimIndent())
-                    }
-                }
+            it.prepareStatement(text).use { ps ->
+                ps.execute()
             }
-
-
         }
+
 
     }
 
-    private fun Connection.getInfo() =
-        """
+}
+
+fun runDelete(text: String?) {
+
+}
+
+fun runQuery(text: String?) {
+}
+
+private fun Connection.getInfo() =
+    """
             client-info: { $clientInfo } 
             schema: { $schema }  
         """.trimIndent()
 
 
-}

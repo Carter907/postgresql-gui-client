@@ -1,5 +1,8 @@
 package org.carte.dbmsapp.controllers
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import javafx.application.Platform
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -14,6 +17,9 @@ import org.carte.dbmsapp.database.PostgresLoginException
 import org.carte.dbmsapp.extensions.changeFxmlSceneRoot
 import java.net.URL
 import java.util.*
+
+class LoginInfo(var database: String, var username: String, var password: String) {
+}
 
 class LoginController : Initializable {
 
@@ -35,39 +41,43 @@ class LoginController : Initializable {
 
         if (javaClass.getResource("/login-info.json") != null) {
 
-
-
-
-
             attemptLogin(connectButton)
         }
 
 
-        connectButton.setOnAction (::onConnectButtonAction)
+        connectButton.setOnAction(::onConnectButtonAction)
     }
 
     private fun onConnectButtonAction(event: ActionEvent) {
         attemptLogin(event.source as Node)
     }
     private fun attemptLogin(node: Node) {
+
+
+        val gson = GsonBuilder().create();
+
+        val info = gson.fromJson(
+            javaClass.getResourceAsStream("/login-info.json")?.readAllBytes()?.decodeToString(), LoginInfo::class.java);
+
         postgresClient = PostgresClient(
-            databaseNameField.text,
+            info.database,
             ClientCredentials(
-                usernameField.text,
-                passwordField.text
+                info.username,
+                info.password
             )
         );
-        try {
-            postgresClient.login();
+        Platform.runLater {
+            try {
+                postgresClient.login();
 
-            val loader = FXMLLoader();
 
-            val controller = node.changeFxmlSceneRoot<MainController>("/main-view.fxml")
+                val controller = node.changeFxmlSceneRoot<MainController>("/main-view.fxml")
 
-            controller.client = postgresClient;
+                controller.client = postgresClient;
 
-        } catch (e: PostgresLoginException) {
-            System.err.println("failed to login: ${e.message}")
+            } catch (e: PostgresLoginException) {
+                System.err.println("failed to login: ${e.message}")
+            }
         }
     }
 }
