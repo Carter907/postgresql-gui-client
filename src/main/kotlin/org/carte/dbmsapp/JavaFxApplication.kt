@@ -12,10 +12,13 @@ import javafx.stage.Stage
 class JavaFxApplication : Application() {
 
     override fun start(stage: Stage) {
+        Font.loadFont(javaClass.getResourceAsStream("/Monocraft.ttf"), 20.0)
         setUserAgentStylesheet(PrimerDark().userAgentStylesheet)
 
         val fxmlLoader = FXMLLoader(javaClass.getResource("/login-view.fxml"))
         val scene = Scene(fxmlLoader.load())
+
+        scene.stylesheets.add(javaClass.getResource("/style.css").toExternalForm())
 
         stage.title = "Postgresql RDBMS Client"
         stage.scene = scene

@@ -2,10 +2,10 @@
     -fx-text-fill: #5d5d5d;
     /*-fx-background-color: #27272a;*/
 
-    -fx-font-family: "JetBrains Mono Light";
 }
-
-
+#queryArea {
+    -fx-font-family: Monocraft;
+}
 /*.root {*/
 /*    -fx-background-color: gray;*/
 /*}*/
